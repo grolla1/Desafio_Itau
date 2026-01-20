@@ -1,4 +1,4 @@
-package com.itau.devItau;
+package com.itau.devItau.service;
 
 public class Service {
 }

@@ -8,6 +8,8 @@ public class DevItauApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DevItauApplication.class, args);
+
+		System.out.println("Welcome, you! My name is Mateus.");
 	}
 
 }

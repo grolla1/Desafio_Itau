@@ -1,4 +1,4 @@
-package com.itau.devItau;
+package com.itau.devItau.controller;
 
 public class Controller {
 }
