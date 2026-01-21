@@ -1,6 +1,6 @@
 package com.itau.devItau.repository;
 
-import com.itau.devItau.model.Transacoes;
+import com.itau.devItau.model.TransacoesModel;
 
 import java.time.Instant;
 import java.util.List;
@@ -9,11 +9,11 @@ import java.util.UUID;
 
 public interface TransacoesInterface {
 
-    Transacoes save(Transacoes transacao);
+    TransacoesModel save(TransacoesModel transacao);
 
-    Optional<Transacoes> findById(UUID id);
+    Optional<TransacoesModel> findById(UUID id);
 
-    List<Transacoes> findTransactionsAfter(Instant instant);
+    List<TransacoesModel> findTransactionsAfter(Instant instant);
 
     void deleteAll();
 }

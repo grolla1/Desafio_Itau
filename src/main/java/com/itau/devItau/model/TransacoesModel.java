@@ -2,15 +2,16 @@ package com.itau.devItau.model;
 
 import jakarta.validation.constraints.NotNull;
 
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
-public class Transacoes {
+public class TransacoesModel {
     //apesar de não persistir as informações no banco, anotação para garantir a completude da classe
     @NotNull
     private UUID id;
     @NotNull
-    private Float valor;
+    private BigDecimal valor;
     @NotNull
     private OffsetDateTime dataHora;
 
@@ -18,7 +19,7 @@ public class Transacoes {
         return this.id;
     }
 
-    public Float getValor() {
+    public BigDecimal getValor() {
         return this.valor;
     }
 
@@ -30,7 +31,7 @@ public class Transacoes {
         this.id = id;
     }
 
-    public void setValor(Float valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
 
