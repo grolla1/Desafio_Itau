@@ -1,10 +1,8 @@
 package com.itau.devItau.dto;
 
-import lombok.Setter;
-
 import java.math.BigDecimal;
 
-public class TransacoesResponse {
+public class TransacoesEstatisticsResponse {
     private long count;
 
     private BigDecimal sum;
