@@ -1,4 +1,4 @@
 package com.itau.devItau.controller;
 
-public class Controller {
+public class TransacoesController {
 }
