@@ -1,6 +1,8 @@
 package com.itau.devItau.service;
 
-import com.itau.devItau.dto.TransacoesResponse;
+import com.itau.devItau.dto.TransacoesEstatisticsResponse;
+import com.itau.devItau.exception.TransactionBusinessException;
+import com.itau.devItau.exception.TransactionNotFoundException;
 import com.itau.devItau.model.TransacoesModel;
 import org.springframework.stereotype.Service;
 import com.itau.devItau.repository.TransacoesRep;
@@ -8,7 +10,6 @@ import com.itau.devItau.repository.TransacoesRep;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,14 +20,22 @@ public class TransacoesService {
         this.repository = repository;
     }
 
-    public TransacoesResponse getTransactionsStatistics(long seconds) {
-        List<TransacoesModel> lastSecondsTransactions = new ArrayList<>();
+    public TransacoesEstatisticsResponse getTransactionsStatistics(long seconds) {
+        if (seconds <= 0) {
+            throw new TransactionBusinessException("O parametro 'Segundos' deve ser maior que zero.");
+        }
+
+        List<TransacoesModel> lastSecondsTransactions;
 
         Instant cutOff = Instant.now().minusSeconds(seconds);
 
         lastSecondsTransactions = repository.findTransactionsAfter(cutOff);
 
-        TransacoesResponse response = new TransacoesResponse();
+        if (lastSecondsTransactions.isEmpty()) {
+            throw new TransactionNotFoundException("Nenhuma transação foi encontrada no período informado.");
+        }
+
+        TransacoesEstatisticsResponse response = new TransacoesEstatisticsResponse();
 
         response.setCount(lastSecondsTransactions.size());
         response.setMax(findMaxValue(lastSecondsTransactions));
