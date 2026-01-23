@@ -1,12 +1,7 @@
 package com.itau.devItau.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.time.OffsetDateTime;
 
-@Getter
-@Setter
 public class ErrorResponse {
     private String messageEx;
 
@@ -14,5 +9,21 @@ public class ErrorResponse {
 
     public ErrorResponse(String messageEx) {
         this.messageEx = messageEx;
+    }
+
+    public String getMessageEx() {
+        return messageEx;
+    }
+
+    public OffsetDateTime getDateTime() {
+        return timeStamp;
+    }
+
+    public void setMessageEx(String messageEx) {
+        this.messageEx = messageEx;
+    }
+
+    public void setTimeStamp(OffsetDateTime timeStamp) {
+        this.timeStamp = timeStamp;
     }
 }
