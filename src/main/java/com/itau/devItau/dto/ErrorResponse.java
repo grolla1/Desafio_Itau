@@ -3,24 +3,24 @@ package com.itau.devItau.dto;
 import java.time.OffsetDateTime;
 
 public class ErrorResponse {
-    private String messageEx;
+    private String message;
 
     OffsetDateTime timeStamp = OffsetDateTime.now();
 
-    public ErrorResponse(String messageEx) {
-        this.messageEx = messageEx;
+    public ErrorResponse(String message) {
+        this.message = message;
     }
 
-    public String getMessageEx() {
-        return messageEx;
+    public String getMessage() {
+        return message;
     }
 
     public OffsetDateTime getDateTime() {
         return timeStamp;
     }
 
-    public void setMessageEx(String messageEx) {
-        this.messageEx = messageEx;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public void setTimeStamp(OffsetDateTime timeStamp) {
