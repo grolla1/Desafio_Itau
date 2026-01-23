@@ -22,7 +22,7 @@ public class TransacoesService {
 
     public TransacoesEstatisticsResponse getTransactionsStatistics(long seconds) {
         if (seconds <= 0) {
-            throw new TransactionBusinessException("O parametro 'Segundos' deve ser maior que zero.");
+            throw new TransactionBusinessException("O parametro 'seconds' deve ser maior que zero.");
         }
 
         List<TransacoesModel> lastSecondsTransactions;
