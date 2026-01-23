@@ -2,7 +2,7 @@ package com.itau.devItau.dto;
 
 import java.math.BigDecimal;
 
-public class TransacoesEstatisticsResponse {
+public class TransactionsEstatisticsResponse {
     private long count;
 
     private BigDecimal sum;

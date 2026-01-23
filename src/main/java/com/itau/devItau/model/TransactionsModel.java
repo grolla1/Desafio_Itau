@@ -8,7 +8,7 @@ import java.util.UUID;
 
 // @Setter
 // @Getter -> possibilidade de usar Lombok para maior rapidez no desenvolvimento
-public class TransacoesModel {
+public class TransactionsModel {
     //apesar de não persistir as informações no banco, anotação para garantir a completude da classe
     @NotNull
     private UUID id;
