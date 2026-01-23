@@ -51,7 +51,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleHttpMessageNotReadableException(HttpMessageNotReadableException exception) {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
-                .body(new ErrorResponse("Obrigatório enviar corpo da requisição."));
+                .body(new ErrorResponse("Assegure que o corpo da requisição está correto e foi enviado."));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
