@@ -25,4 +25,9 @@ public class TransactionsController {
     public void postTransactions(@Valid @RequestBody TransactionsInsertRequest trasactions) {
         service.transactionsSave(trasactions);
     }
+
+    @DeleteMapping("/transacao")
+    public void deleteTransactions() {
+        service.deleteAll();
+    }
 }

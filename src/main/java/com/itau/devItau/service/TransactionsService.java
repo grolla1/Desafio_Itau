@@ -61,6 +61,10 @@ public class TransactionsService {
         repository.save(transactionsModel);
     }
 
+    public void deleteAll() {
+        repository.deleteAll();
+    }
+
     private BigDecimal findMaxValue(List<TransactionsModel> transactions) {
         return transactions.stream()
                 .map(TransactionsModel::getValor)
