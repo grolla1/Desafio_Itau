@@ -1,6 +1,6 @@
 package com.itau.devItau.repository;
 
-import com.itau.devItau.model.TransacoesModel;
+import com.itau.devItau.model.TransactionsModel;
 import org.springframework.stereotype.Repository;
 
 import java.time.Instant;
@@ -8,12 +8,12 @@ import java.time.OffsetDateTime;
 import java.util.*;
 
 @Repository
-public class TransacoesRep implements TransacoesInterface{
+public class TransactionsRep implements TransactionsInterface {
 
-    private final Map<UUID, TransacoesModel> memoStorage = new HashMap<>();
+    private final Map<UUID, TransactionsModel> memoStorage = new HashMap<>();
 
     @Override
-    public TransacoesModel save(TransacoesModel transacao) {
+    public TransactionsModel save(TransactionsModel transacao) {
         if (transacao.getId() == null) {
             transacao.setId(UUID.randomUUID());
         }
@@ -22,15 +22,13 @@ public class TransacoesRep implements TransacoesInterface{
     }
 
     @Override
-    public Optional<TransacoesModel> findById(UUID id) {
+    public Optional<TransactionsModel> findById(UUID id) {
         return Optional.ofNullable(memoStorage.get(id));
     }
 
     @Override
     // recebe o tempo passado limite em que deve ser feito o filtro de transações
-    public List<TransacoesModel> findTransactionsAfter(Instant cutOff) {
-        long cutOffMillis = cutOff.toEpochMilli(); // pega o tempo até x segundos atrás em milissegundos
-
+    public List<TransactionsModel> findTransactionsAfter(long cutOffMillis) {
         return memoStorage.values()
                 .stream()
                 .filter(
