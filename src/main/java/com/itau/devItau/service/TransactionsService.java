@@ -5,6 +5,8 @@ import com.itau.devItau.dto.TransactionsInsertRequest;
 import com.itau.devItau.exception.TransactionBusinessException;
 import com.itau.devItau.model.TransactionsModel;
 import org.eclipse.collections.impl.collector.BigDecimalSummaryStatistics;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import com.itau.devItau.repository.TransactionsRep;
 
@@ -17,17 +19,23 @@ import java.util.UUID;
 public class TransactionsService {
     private final TransactionsRep repository;
 
+    private static final Logger logger = LoggerFactory.getLogger(TransactionsService.class);
+
     public TransactionsService(TransactionsRep repository) {
         this.repository = repository;
     }
 
     public TransactionsEstatisticsResponse getTransactionsStatistics(long seconds) {
+        logger.info("======= SERVICE: getTransactionsStatistics =======");
         if (seconds <= 0) {
+            logger.error("Erro: O parametro 'seconds' deve ser maior que zero.");
             throw new TransactionBusinessException("O parametro 'seconds' deve ser maior que zero.");
         }
 
         List<TransactionsModel> lastSecondsTransactions =
                 repository.findTransactionsAfter(defineCutOffMillis(seconds));
+
+        logger.debug("Lista de Transações: {}", lastSecondsTransactions);
 
         BigDecimalSummaryStatistics stats = calculateStatistics(lastSecondsTransactions);
 
@@ -43,9 +51,11 @@ public class TransactionsService {
     }
 
     public void transactionsSave(TransactionsInsertRequest transaction) {
+        logger.info("======= SERVICE: transactionsSave =======");
         Instant agora = Instant.now();
 
         if (transaction.getDataHora().toInstant().toEpochMilli() > agora.toEpochMilli()) {
+            logger.error("Erro: A transação não pode ser registrada, pois a data informada é futura.");
             throw new TransactionBusinessException("A transação não pode ser registrada, pois a data informada é futura.");
         }
 
@@ -59,6 +69,7 @@ public class TransactionsService {
     }
 
     public void deleteAll() {
+        logger.info("======= SERVICE: deleteAll =======");
         repository.deleteAll();
     }
 

@@ -1,6 +1,8 @@
 package com.itau.devItau.repository;
 
 import com.itau.devItau.model.TransactionsModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import java.time.Instant;
@@ -12,23 +14,25 @@ public class TransactionsRep implements TransactionsInterface {
 
     private final Map<UUID, TransactionsModel> memoStorage = new HashMap<>();
 
+    private static final Logger logger = LoggerFactory.getLogger(TransactionsRep.class);
+
     @Override
     public TransactionsModel save(TransactionsModel transacao) {
-        if (transacao.getId() == null) {
-            transacao.setId(UUID.randomUUID());
-        }
+        logger.info("======= REPOSITORY: save =======");
         memoStorage.put(transacao.getId(), transacao);
         return transacao;
     }
 
     @Override
     public Optional<TransactionsModel> findById(UUID id) {
+        logger.info("======= REPOSITORY: findById =======");
         return Optional.ofNullable(memoStorage.get(id));
     }
 
     @Override
     // recebe o tempo passado limite em que deve ser feito o filtro de transações
     public List<TransactionsModel> findTransactionsAfter(long cutOffMillis) {
+        logger.info("======= REPOSITORY: findTransactionsAfter =======");
         return memoStorage.values()
                 .stream()
                 .filter(
@@ -38,6 +42,7 @@ public class TransactionsRep implements TransactionsInterface {
 
     @Override
     public void deleteAll() {
+        logger.info("======= REPOSITORY: deleteAll =======");
         memoStorage.clear();
     }
 
